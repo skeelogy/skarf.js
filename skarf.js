@@ -21,7 +21,7 @@
 /**
  * @fileOverview Generic JavaScript augmented reality (AR) framework for handling different JavaScript AR libraries in Three.js
  * @author Skeel Lee <skeel@skeelogy.com>
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @example
  *
@@ -55,7 +55,7 @@
 /**
  * @namespace
  */
-var SKARF = SKARF || { version: '1.0.0' };
+var SKARF = SKARF || { version: '1.0.1' };
 console.log('Using SKARF ' + SKARF.version);
 
 //===================================
@@ -710,8 +710,8 @@ SKARF.ObjModelLoader.prototype.loadForMarker = function (model, markerId, marker
 
     //store variables in the instance since there seems to be no way to pass to loader.load (TODO: verify this)
     this.model = model;
-    this.__markerId = markerId;
-    this.__markerTransform = markerTransform;
+    this.markerId = markerId;
+    this.markerTransform = markerTransform;
     this.overallScale = overallScale;
     this.isWireframeVisible = isWireframeVisible;
     this.markerManager = markerManager;
@@ -897,7 +897,7 @@ SKARF.ArLib = function (options) {
     if (typeof options.markerSize === 'undefined') {
         throw new Error('markerSize not specified');
     }
-    this.__markerSize = options.markerSize;
+    this.markerSize = options.markerSize;
 
     this.verticalFov = options.verticalFov;
 
@@ -978,7 +978,7 @@ SKARF.JsArToolKitArLib.prototype.init = function () {
 
     // The FLARMultiIdMarkerDetector is the actual detection engine for marker detection.
     // It detects multiple ID markers. ID markers are special markers that encode a number.
-    this.detector = new FLARMultiIdMarkerDetector(this.flarParam, this.__markerSize);
+    this.detector = new FLARMultiIdMarkerDetector(this.flarParam, this.markerSize);
 
     // For tracking video set continue mode to true. In continue mode, the detector
     // tracks markers across multiple frames.
@@ -1045,10 +1045,10 @@ SKARF.JsArToolKitArLib.prototype.update = function (dt) {
             this.markers[currId] = {};
 
             //create a transform for this marker
-            var transform = this.renderer.__createTransformForMarker(currId, this.__markerSize);
+            var transform = this.renderer.__createTransformForMarker(currId, this.markerSize);
 
             //delay-load the model
-            this.renderer.loadForMarker(currId, transform, this.__markerSize);
+            this.renderer.loadForMarker(currId, transform, this.markerSize);
 
             //if this is the main marker id, turn on flag
             if (currId == this.mainMarkerId) {  //double equals for auto type conversion
@@ -1103,7 +1103,7 @@ SKARF.JsArucoArLib.prototype.init = function () {
     //NOTE: the second parameter is suppose to be canvasWidth (from the js-aruco example).
     //However, it cannot work when I change the aspect ratio of the tracking canvas.
     //It seems as though the tracking canvas must be 4:3, so I'm doing some compensation here to allow any aspect ratio.
-    this.posit = new POS.Posit(this.__markerSize, this.canvasElem.height * 4.0 / 3.0);
+    this.posit = new POS.Posit(this.markerSize, this.canvasElem.height * 4.0 / 3.0);
 
     this.context = this.canvasElem.getContext('2d');
 };
@@ -1145,10 +1145,10 @@ SKARF.JsArucoArLib.prototype.__updateScenes = function (dt, markers) {
             this.markers[markerId] = {};
 
             //create a transform for this marker
-            var transform = this.renderer.__createTransformForMarker(markerId, this.__markerSize);
+            var transform = this.renderer.__createTransformForMarker(markerId, this.markerSize);
 
             //delay-load the model
-            this.renderer.loadForMarker(markerId, transform, this.__markerSize);
+            this.renderer.loadForMarker(markerId, transform, this.markerSize);
 
             //if this is the main marker id, turn on flag
             if (markerId == this.mainMarkerId) {  //double equals for auto type conversion
@@ -1629,7 +1629,7 @@ SKARF.Skarf = function (options) {
     if (typeof options.markerSize === 'undefined') {
         throw new Error('markerSize not specified');
     }
-    this.__markerSize = options.markerSize;
+    this.markerSize = options.markerSize;
     this.verticalFov = options.verticalFov;
     this.threshold = options.threshold || 128;
     this.debug = typeof options.debug === 'undefined' ? false : options.debug;
@@ -1694,7 +1694,7 @@ SKARF.Skarf.prototype.__init = function () {
     //create AR lib instance
     this.arLib = SKARF.ArLibFactory.create(this.arLibType, {
         trackingElem: this.trackingElem,
-        markerSize: this.__markerSize,
+        markerSize: this.markerSize,
         verticalFov: this.verticalFov,
         mainMarkerId: this.renderer.getMainMarkerId(),
         threshold: this.threshold,
