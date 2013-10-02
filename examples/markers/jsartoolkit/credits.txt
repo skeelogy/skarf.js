@@ -1,0 +1,3 @@
+marker files: 22.jpg, 63.jpg, 81.jpg
+credits: JSARToolkit
+https://github.com/kig/JSARToolKit/tree/master/demos/markers
