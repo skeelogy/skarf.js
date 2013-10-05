@@ -3,7 +3,7 @@ skarf.js
 
 ### Introduction
 
-This is a JavaScript augmented reality (AR) framework for handling different AR libraries in Three.js.
+This is a framework for handling JavaScript augmented reality (AR) libraries in Three.js.
 
 ### Integrated AR libraries
 
