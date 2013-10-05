@@ -1,4 +1,31 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: skarf.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: skarf.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>/**
  * skarf.js
  * Generic JavaScript augmented reality (AR) framework for handling different JavaScript AR libraries in Three.js
  *
@@ -20,7 +47,7 @@
 
 /**
  * @fileOverview Generic JavaScript augmented reality (AR) framework for handling different JavaScript AR libraries in Three.js
- * @author Skeel Lee <skeel@skeelogy.com>
+ * @author Skeel Lee &lt;skeel@skeelogy.com>
  * @version 1.0.2
  *
  * @example
@@ -106,7 +133,7 @@ SKARF.GuiMarkerFactory = {
 };
 
 /**
- * An augmented reality GUI marker.<br/>
+ * An augmented reality GUI marker.&lt;br/>
  * @constructor
  * @abstract
  */
@@ -195,7 +222,7 @@ SKARF.GuiMarker.prototype.__processPosition = function (worldMatrix) {
     //check if marker has moved
     this.__dPosition.copy(this.__position.clone().sub(this.__prevPosition));
     var movedDist = this.__dPosition.length();
-    if (movedDist >= this.__moveThresholdLow && movedDist <= this.__moveThresholdHigh) {
+    if (movedDist >= this.__moveThresholdLow && movedDist &lt;= this.__moveThresholdHigh) {
         //call the moved callback
         this.__invokeCallback('moved', {guiMarker: this, position: this.__position, dPosition: this.__dPosition});
     }
@@ -217,13 +244,13 @@ SKARF.GuiMarker.prototype.__processRotation = function (worldMatrix) {
     //check cross product against world Y
     var orthoAxis = new THREE.Vector3().crossVectors(this.__currZAxis, this.__worldZAxis);
     var orthoAngle = orthoAxis.dot(this.__worldYAxis);
-    if (orthoAngle < 0) {  //opposite side
+    if (orthoAngle &lt; 0) {  //opposite side
         this.__rotation = 360 - this.__rotation;
     }
 
     this.__dRotation = this.__rotation - this.__prevRotation;
     var absDRot = Math.abs(this.__dRotation);
-    if (!isNaN(this.__dRotation) && absDRot >= this.__rotThresholdLow && absDRot <= this.__rotThresholdHigh) {
+    if (!isNaN(this.__dRotation) && absDRot >= this.__rotThresholdLow && absDRot &lt;= this.__rotThresholdHigh) {
         this.__invokeCallback('rotated', {guiMarker: this, rotation: this.__rotation, dRotation: this.__dRotation});
     }
 
@@ -277,8 +304,8 @@ SKARF.GuiMarker.prototype.__invokeCallback = function (type, options) {
 };
 
 /**
- * Generic SKARF.GuiMarker<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * Generic SKARF.GuiMarker&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -292,8 +319,8 @@ SKARF.GenericMarker.prototype.constructor = SKARF.GenericMarker;
 SKARF.GuiMarkerFactory.register('generic', SKARF.GenericMarker);
 
 /**
- * SKARF.GuiMarker that activates once until the marker is next shown<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * SKARF.GuiMarker that activates once until the marker is next shown&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -315,8 +342,8 @@ SKARF.ButtonMarker.prototype.__processCallbacks = function () {
 };
 
 /**
- * SKARF.GuiMarker that toggles an on/off state once until the marker is next shown<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * SKARF.GuiMarker that toggles an on/off state once until the marker is next shown&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -340,8 +367,8 @@ SKARF.CheckBoxMarker.prototype.__processCallbacks = function () {
 };
 
 /**
- * SKARF.GuiMarker that emulates an attribute-changing slider by rotating<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * SKARF.GuiMarker that emulates an attribute-changing slider by rotating&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -358,15 +385,15 @@ SKARF.GuiMarkerFactory.register('slider', SKARF.SliderMarker);
 //override
 SKARF.SliderMarker.prototype.__processCallbacks = function () {
     var absDRot = Math.abs(this.__dRotation);
-    if (!isNaN(this.__dRotation) && absDRot >= this.__rotThresholdLow && absDRot <= this.__rotThresholdHigh) {
+    if (!isNaN(this.__dRotation) && absDRot >= this.__rotThresholdLow && absDRot &lt;= this.__rotThresholdHigh) {
         this.__invokeCallback('changed', {guiMarker: this, delta: this.__dRotation * this.__speed});
     }
     SKARF.GuiMarker.prototype.__processCallbacks.call(this);
 };
 
 /**
- * SKARF.GuiMarker that emulates a combo box. Selection is based on orientation of marker.<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * SKARF.GuiMarker that emulates a combo box. Selection is based on orientation of marker.&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -395,8 +422,8 @@ SKARF.ComboBoxMarker.prototype.__processCallbacks = function () {
 };
 
 /**
- * SKARF.GuiMarker that activates after a certain amount of time<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.</strong>
+ * SKARF.GuiMarker that activates after a certain amount of time&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -548,8 +575,8 @@ SKARF.ModelLoader.prototype.transformAndParent = function (model, obj, markerTra
 };
 
 /**
- * Model loader which contains no models<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.</strong>
+ * Model loader which contains no models&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ModelLoader}
  */
@@ -584,7 +611,7 @@ SKARF.EmptyModelLoader.prototype.loadForMarker = function (model, markerId, mark
 
 /**
  * Model loader which contains Three.js JSON model data
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.</strong>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ModelLoader}
  */
@@ -616,7 +643,7 @@ SKARF.JsonModelLoader.prototype.loadForMarker = function (model, markerId, marke
 
         //set wireframe visibility
         var i, len;
-        for (i = 0, len = materials.length; i < len; i++) {
+        for (i = 0, len = materials.length; i &lt; len; i++) {
             materials[i].wireframe = isWireframeVisible;
         }
 
@@ -632,7 +659,7 @@ SKARF.JsonModelLoader.prototype.loadForMarker = function (model, markerId, marke
 
 /**
  * Model loader which contains Three.js JSON binary models
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.</strong>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ModelLoader}
  */
@@ -652,7 +679,7 @@ SKARF.ModelLoaderFactory.register('json_bin', SKARF.JsonBinaryModelLoader);
 
 /**
  * Model loader which contains OBJ models
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.</strong>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ModelLoaderFactory ModelLoaderFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ModelLoader}
  */
@@ -675,9 +702,9 @@ SKARF.ObjModelLoader = function () {
         //set wireframe visibility
         var child, grandChild;
         var i, j, leni, lenj;
-        for (i = 0, leni = object.children.length; i < leni; i++) {
+        for (i = 0, leni = object.children.length; i &lt; leni; i++) {
             child = object.children[i];
-            for (j = 0, lenj = child.children.length; j < lenj; j++) {
+            for (j = 0, lenj = child.children.length; j &lt; lenj; j++) {
                 grandChild = child.children[j];
                 if (grandChild instanceof THREE.Mesh) {
                     grandChild.material.wireframe = that.__isWireframeVisible;
@@ -839,8 +866,8 @@ function copyMarkerMatrix(arMat, glMat) {
 //===================================
 
 /**
- * Factory which creates SKARF.ArLibs<br/>
- * <strong>NOTE: This is meant for internal usage only as the created instance needs some manual variable assignments and initializations before they are usable. These are done internally by a {@linkcode SKARF.Skarf Skarf} instance.</strong>
+ * Factory which creates SKARF.ArLibs&lt;br/>
+ * &lt;strong>NOTE: This is meant for internal usage only as the created instance needs some manual variable assignments and initializations before they are usable. These are done internally by a {@linkcode SKARF.Skarf Skarf} instance.&lt;/strong>
  * @namespace
  */
 SKARF.ArLibFactory = {
@@ -952,8 +979,8 @@ SKARF.ArLib.prototype.update = function (dt) {
 };
 
 /**
- * ArLib class for JSARToolKit.<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ArLibFactory ArLibFactory} instead.</strong>
+ * ArLib class for JSARToolKit.&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ArLibFactory ArLibFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ArLib}
  */
@@ -1035,7 +1062,7 @@ SKARF.JsArToolKitArLib.prototype.update = function (dt) {
     //set all markers detected to false first
     var keys = Object.keys(this.__markers);
     var i, j;
-    for (i = 0; i < keys.length; i++) {
+    for (i = 0; i &lt; keys.length; i++) {
         this.__renderer.__setMarkerDetected(keys[i], false);
     }
 
@@ -1044,12 +1071,12 @@ SKARF.JsArToolKitArLib.prototype.update = function (dt) {
     // for turning the video frame into a 1-bit black-and-white image.
     //
     //NOTE: THE CANVAS MUST BE THE SAME SIZE AS THE RASTER
-    //OTHERWISE WILL GET AN "Uncaught #<Object>" ERROR
+    //OTHERWISE WILL GET AN "Uncaught #&lt;Object>" ERROR
     var markerCount = this.__detector.detectMarkerLite(this.__raster, this.__threshold);
 
     // Go through the detected markers and get their IDs and transformation matrices.
     var id, currId;
-    for (i = 0; i < markerCount; i++) {
+    for (i = 0; i &lt; markerCount; i++) {
 
         // Get the ID marker data for the current marker.
         // ID markers are special kind of markers that encode a number.
@@ -1059,10 +1086,10 @@ SKARF.JsArToolKitArLib.prototype.update = function (dt) {
         // Read bytes from the id packet.
         currId = -1;
         // This code handles only 32-bit numbers or shorter.
-        if (id.packetLength <= 4) {
+        if (id.packetLength &lt;= 4) {
             currId = 0;
-            for (j = 0; j < id.packetLength; j++) {
-                currId = (currId << 8) | id.getPacketData(j);
+            for (j = 0; j &lt; id.packetLength; j++) {
+                currId = (currId &lt;&lt; 8) | id.getPacketData(j);
             }
         }
 
@@ -1108,8 +1135,8 @@ SKARF.JsArToolKitArLib.prototype.update = function (dt) {
 };
 
 /**
- * ArLib class for js-aruco.<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ArLibFactory ArLibFactory} instead.</strong>
+ * ArLib class for js-aruco.&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.ArLibFactory ArLibFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.ArLib}
  */
@@ -1156,11 +1183,11 @@ SKARF.JsArucoArLib.prototype.__updateScenes = function (dt, markers) {
     //set all markers detected to false first
     var keys = Object.keys(this.__markers);
     var i, j;
-    for (i = 0; i < keys.length; i++) {
+    for (i = 0; i &lt; keys.length; i++) {
         this.__renderer.__setMarkerDetected(keys[i], false);
     }
 
-    for (i = 0; i < markers.length; i++) {
+    for (i = 0; i &lt; markers.length; i++) {
         markerId = markers[i].id;
         corners = markers[i].corners;
 
@@ -1185,7 +1212,7 @@ SKARF.JsArucoArLib.prototype.__updateScenes = function (dt, markers) {
         }
 
         //align corners to center of canvas
-        for (j = 0; j < corners.length; j++) {
+        for (j = 0; j &lt; corners.length; j++) {
             corner = corners[j];
             //NOTE: there seems to be some scale away from the center, so I have to scale everything down from the center.
             //The value of 0.97 is by trial-and-error, seems to work pretty well.
@@ -1224,14 +1251,14 @@ SKARF.JsArucoArLib.prototype.__updateMatrix4FromRotAndTrans = function (rotation
 SKARF.JsArucoArLib.prototype.__drawCorners = function (markers) {
 
     var corners, corner, i, j, leni, lenj;
-    for (i = 0, leni = markers.length; i < leni; i++) {
+    for (i = 0, leni = markers.length; i &lt; leni; i++) {
         corners = markers[i].corners;
 
         this.__context.lineWidth = 2;
         this.__context.strokeStyle = "red";
         this.__context.beginPath();
 
-        for (j = 0, lenj = corners.length; j < lenj; j++) {
+        for (j = 0, lenj = corners.length; j &lt; lenj; j++) {
             corner = corners[j];
             this.__context.moveTo(corner.x, corner.y);
             corner = corners[(j + 1) % corners.length];
@@ -1255,7 +1282,7 @@ SKARF.JsArucoArLib.prototype.__drawId = function (markers) {
     // this.__context.strokeStyle = "black";
     // this.__context.lineWidth = 1.0;
 
-    for (i = 0, len = markers.length; i < len; i++) {
+    for (i = 0, len = markers.length; i &lt; len; i++) {
         corners = markers[i].corners;
 
         x = corners[0].x;
@@ -1271,8 +1298,8 @@ SKARF.JsArucoArLib.prototype.__drawId = function (markers) {
 //===================================
 
 /**
- * Factory which creates SKARF.Renderer<br/>
- * <strong>NOTE: This is meant for internal usage only as the created instance needs some manual variable assignments and initializations before they are usable. These are done internally by a {@linkcode SKARF.Skarf Skarf} instance.</strong>
+ * Factory which creates SKARF.Renderer&lt;br/>
+ * &lt;strong>NOTE: This is meant for internal usage only as the created instance needs some manual variable assignments and initializations before they are usable. These are done internally by a {@linkcode SKARF.Skarf Skarf} instance.&lt;/strong>
  * @namespace
  */
 SKARF.RendererFactory = {
@@ -1447,8 +1474,8 @@ SKARF.Renderer.prototype.hideAllModels = function () {
 };
 
 /**
- * Renderer class for Three.js<br/>
- * <strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.RendererFactory RendererFactory} instead.</strong>
+ * Renderer class for Three.js&lt;br/>
+ * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.RendererFactory RendererFactory} instead.&lt;/strong>
  * @constructor
  * @extends {SKARF.Renderer}
  */
@@ -1482,7 +1509,7 @@ SKARF.ThreeJsRenderer.prototype.update = function (dt) {
     if (this.__callbacks.hasOwnProperty('render')) {
         var renderCallbacks = this.__callbacks['render'];
         var i, len;
-        for (i = 0, len = renderCallbacks.length; i < len; i++) {
+        for (i = 0, len = renderCallbacks.length; i &lt; len; i++) {
             renderCallbacks[i](dt);
         }
     }
@@ -1494,7 +1521,7 @@ SKARF.ThreeJsRenderer.prototype.update = function (dt) {
 SKARF.ThreeJsRenderer.prototype.__showChildren = function (object3d, visible) {
     var children = object3d.children;
     var i, len;
-    for (i = 0, len = children.length; i < len; i++) {
+    for (i = 0, len = children.length; i &lt; len; i++) {
         if (!visible) {
             //if hide mode, just hide without caring about the type
             children[i].visible = visible;
@@ -1509,7 +1536,7 @@ SKARF.ThreeJsRenderer.prototype.__showChildren = function (object3d, visible) {
     }
 };
 SKARF.ThreeJsRenderer.prototype.__setupBackgroundVideo = function () {
-    //NOTE: must use <canvas> as the texture, not <video>, otherwise there will be a 1-frame lag
+    //NOTE: must use &lt;canvas> as the texture, not &lt;video>, otherwise there will be a 1-frame lag
     this.__videoTex = new THREE.Texture(this.__backgroundCanvasElem);
     this.__videoPlane = new THREE.PlaneGeometry(2, 2);
     this.__videoMaterial = new THREE.MeshBasicMaterial({
@@ -1555,10 +1582,10 @@ SKARF.ThreeJsRenderer.prototype.setWireframeVisible = function (isVisible) {
     this.__isWireframeVisible = isVisible;
 
     var i, j, leni, lenj, m;
-    for (i = 0, leni = this.__markerManager.__materials.length; i < leni; i++) {
+    for (i = 0, leni = this.__markerManager.__materials.length; i &lt; leni; i++) {
         m = this.__markerManager.__materials[i];
         if (m instanceof THREE.MeshFaceMaterial) {
-            for (j = 0, lenj = m.materials.length; j < lenj; j++) {
+            for (j = 0, lenj = m.materials.length; j &lt; lenj; j++) {
                 m.materials[j].wireframe = isVisible;
             }
         } else {
@@ -1573,7 +1600,7 @@ SKARF.ThreeJsRenderer.prototype.setWireframeVisible = function (isVisible) {
 SKARF.ThreeJsRenderer.prototype.setLocalAxisVisible = function (isVisible) {
     this.__isLocalAxisVisible = isVisible;
     var i, len;
-    for (i = 0, len = this.__localAxes.length; i < len; i++) {
+    for (i = 0, len = this.__localAxes.length; i &lt; len; i++) {
         this.__localAxes[i].visible = isVisible;
     }
 };
@@ -1815,4 +1842,26 @@ SKARF.Skarf.prototype.initCameraProjMatrix = function () {
     if (this.__arLib instanceof SKARF.JsArToolKitArLib) {
         this.__arLib.initCameraProjMatrix();
     }
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="SKARF.ArLib.html">ArLib</a></li><li><a href="SKARF.ButtonMarker.html">ButtonMarker</a></li><li><a href="SKARF.CheckBoxMarker.html">CheckBoxMarker</a></li><li><a href="SKARF.ComboBoxMarker.html">ComboBoxMarker</a></li><li><a href="SKARF.EmptyModelLoader.html">EmptyModelLoader</a></li><li><a href="SKARF.GenericMarker.html">GenericMarker</a></li><li><a href="SKARF.GuiMarker.html">GuiMarker</a></li><li><a href="SKARF.JsArToolKitArLib.html">JsArToolKitArLib</a></li><li><a href="SKARF.JsArucoArLib.html">JsArucoArLib</a></li><li><a href="SKARF.JsonBinaryModelLoader.html">JsonBinaryModelLoader</a></li><li><a href="SKARF.JsonModelLoader.html">JsonModelLoader</a></li><li><a href="SKARF.MarkerManager.html">MarkerManager</a></li><li><a href="SKARF.ModelLoader.html">ModelLoader</a></li><li><a href="SKARF.ObjModelLoader.html">ObjModelLoader</a></li><li><a href="SKARF.Renderer.html">Renderer</a></li><li><a href="SKARF.Skarf.html">Skarf</a></li><li><a href="SKARF.SliderMarker.html">SliderMarker</a></li><li><a href="SKARF.ThreeJsRenderer.html">ThreeJsRenderer</a></li><li><a href="SKARF.TimerMarker.html">TimerMarker</a></li></ul><h3>Namespaces</h3><ul><li><a href="SKARF.html">SKARF</a></li><li><a href="SKARF.ArLibFactory.html">ArLibFactory</a></li><li><a href="SKARF.GuiMarkerFactory.html">GuiMarkerFactory</a></li><li><a href="SKARF.ModelLoaderFactory.html">ModelLoaderFactory</a></li><li><a href="SKARF.RendererFactory.html">RendererFactory</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sat, 05 Oct 2013 02:16:51 GMT
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
