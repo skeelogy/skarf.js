@@ -21,7 +21,7 @@
 /**
  * @fileOverview Generic JavaScript augmented reality (AR) framework for handling different JavaScript AR libraries in Three.js
  * @author Skeel Lee <skeel@skeelogy.com>
- * @version 1.0.2
+ * @version 1.0.3
  *
  * @example
  *
@@ -55,7 +55,7 @@
 /**
  * @namespace
  */
-var SKARF = SKARF || { version: '1.0.2' };
+var SKARF = SKARF || { version: '1.0.3' };
 console.log('Using SKARF ' + SKARF.version);
 
 //===================================
@@ -1778,17 +1778,20 @@ SKARF.Skarf.prototype.getArLib = function () {
  * @param {number} dt Elapsed time since previous frame
  */
 SKARF.Skarf.prototype.update = function (dt) {
-    //draw the video/img to canvas
-    // if (this.videoElem.readyState === this.videoElem.HAVE_ENOUGH_DATA) {
 
-    this.__context.drawImage(this.__trackingElem, 0, 0, this.__canvasElem.width, this.__canvasElem.height);
-    this.__canvasElem.changed = true;
+    //draw image from tracking element (video, img, canvas) to the actual canvas meant for tracking
+    try {
+        this.__context.drawImage(this.__trackingElem, 0, 0, this.__canvasElem.width, this.__canvasElem.height);
+        this.__canvasElem.changed = true;
+    } catch (err) {
+        if (err.name !== 'NS_ERROR_NOT_AVAILABLE') {
+            throw err;
+        }
+    }
 
     //call updates
     this.__arLib.update(dt);
     this.__renderer.update(dt);
-
-    // }
 };
 /**
  * Adds a callback function that will be called during specific events
