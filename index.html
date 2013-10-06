@@ -41,7 +41,7 @@
         <h3>
 <a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
-<p>This is a framework for handling different JavaScript AR libraries in Three.js.</p>
+<p>This is a framework for handling JavaScript augmented reality (AR) libraries in Three.js.</p>
 
 <h3>
 <a name="integrated-ar-libraries" class="anchor" href="#integrated-ar-libraries"><span class="octicon octicon-link"></span></a>Integrated AR libraries</h3>
@@ -53,11 +53,11 @@
 <a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h3>
 
 <ul>
-<li>Specify marker-model relationships using a <a href="https://github.com/skeelogy/skarf.js/blob/master/examples/models/models_jsartoolkit.json">JSON marker-model file</a>. An internal marker manager automatically manages loading of models when associated marker is detected.</li>
-<li>Model loader system to easily load different file formats (OBJ, JSON and binary JSON) into Three.js</li>
 <li>All coordinate system differences between different AR libraries have been compensated to fit Three.js' right-handed Y-up coordinate system (i.e. no flipping, weird orientation of models etc)</li>
-<li>Specified main marker defines the origin. Camera and other markers are all positioned relative to this origin.</li>
-<li>GUI markers system that allows users to control user settings using AR markers</li>
+<li>Specified main marker defines the origin. Camera and other markers are all positioned relative to this origin, so lighting/shadows work properly in the scene. Most online examples demonstrate AR with a static camera only, with moving objects.</li>
+<li>Specify marker-model relationships using a <a href="https://github.com/skeelogy/skarf.js/blob/master/examples/models/models_jsartoolkit.json">JSON marker-model file</a>. An internal marker manager automatically manages loading of models when associated marker is detected.</li>
+<li>Model loader system loads different model file formats into Three.js: OBJ, JSON and binary JSON</li>
+<li>GUI markers system allows users to control user settings using AR markers</li>
 <li>Expandable to fit other JavaScript AR libraries in the future</li>
 </ul><h3>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h3>
