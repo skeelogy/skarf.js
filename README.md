@@ -21,7 +21,21 @@ This is a framework for handling JavaScript augmented reality (AR) libraries in 
 
 ### Examples
 
-* [Tracking Three.js Scene](http://skeelogy.github.io/skarf.js/examples/skarf_trackThreejsScene.html)
+**1) Tracking Three.js Scene** [[Demo](http://skeelogy.github.io/skarf.js/examples/skarf_trackThreejsScene.html)]
+
+&nbsp;&nbsp;&nbsp;[![ScreenShot](http://skeelogy.github.io/skarf.js/screenshots/video_skarf_trackThreejsScene.jpg)](http://www.youtube.com/watch?v=FjjuFBcg0_Y)
+
+* Tracking of a Three.js 3D scene to prevent webcam problems such as motion blur and lens distortion (for testing purposes)
+* Loading of models when associated markers are detected
+
+**2) HTML5 Augmented Reality Interactive Flood Simulation** [[Demo](http://skeelogy.github.io/ifc-ar-flood/demo.html)]
+
+&nbsp;&nbsp;&nbsp;[![ScreenShot](http://skeelogy.github.io/ifc-ar-flood/screenshots/video_ifcArFlood_main.jpg)](http://www.youtube.com/watch?v=qEFH_r_X7kY)
+
+* Tracking of webcam video stream
+* Using GUI markers system to control user settings with AR markers
+* Loading of models when associated markers are detected
+* Usage of main marker to define origin
 
 ### Docs
 
