@@ -1,0 +1,7 @@
+marker contact sheets: jsartoolkit-markers-contactsheet-*.png
+credits: skarf.js
+https://github.com/skeelogy/skarf.js/blob/master/markers/jsartoolkit
+
+individual marker files: ??.png
+credits: JSARToolkit
+https://github.com/kig/JSARToolKit/tree/master/demos/markers
