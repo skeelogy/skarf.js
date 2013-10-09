@@ -49,7 +49,7 @@
     
     
     <div class="description">
-        SKARF.GuiMarker that activates after a certain amount of time<br/><strong>Please do not instantiate this class on your own. Use the <a href="SKARF.GuiMarkerFactory.html"><code>GuiMarkerFactory</code></a> instead.</strong>
+        SKARF.GuiMarker that activates after a certain amount of time<br/><strong>Please do not instantiate this class on your own. Use the <a href="SKARF.GuiMarkerFactory.html"><code>GuiMarkerFactory</code></a> instead.</strong><p>GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: <em>myKey_myCallbackType</em>.For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.<blockquote><tt>sculptAmountSlider_changed = function (params) { ... }</tt></blockquote>The <tt>params</tt> argument will contain necessary data for that particular event. In the example above, <tt>params.delta</tt> will give the change in rotation since previous frame.</p><p>Available events:<br/><ul>  <li><strong>reached:</strong> invoked when timer has reached specified time</li>    <ul>      <li>params.guiMarker: this instance</li>    </ul></ul></p><p>Available parameter in JSON file:<br/><ul>  <li><strong>time:</strong> duration of timer (defaults to 2.0) </li></ul></p><p>Inherited events from SKARF.GuiMarker:<br/><ul>  <li><strong>moved:</strong> invoked when marker is moved</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.position: current world position</li>      <li>params.dPosition: change in position since previous frame</li>    </ul>  <li><strong>rotated:</strong> invoked when marker is rotated</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.rotation: current world rotation</li>      <li>params.dRotation: change in rotation since previous frame</li>    </ul>  <li><strong>detected:</strong> invoked when the <tt>detected()</tt> method is called</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.worldMatrix: world matrix of the marker solve</li>      <li>params.position: current world position</li>      <li>params.rotation: current world rotation</li>    </ul>  <li><strong>firstDetected:</strong> invoked when the <tt>detected()</tt> method is first called since last <tt>hidden()</tt> call</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.worldMatrix: world matrix of the marker solve</li>      <li>params.position: current world position</li>      <li>params.rotation: current world rotation</li>    </ul>  <li><strong>hidden:</strong> invoked when the <tt>hidden()</tt> method is called</li>    <ul>      <li>params.guiMarker: this instance</li>    </ul>  <li><strong>firstHidden:</strong> invoked when the <tt>hidden()</tt> method is first called since last <tt>detected()</tt> call</li>    <ul>      <li>params.guiMarker: this instance</li>    </ul></ul></p>
     </div>
     
 
@@ -82,7 +82,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line403">line 403</a>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line779">line 779</a>
     </li></ul></dd>
     
     
@@ -129,6 +129,219 @@
     
     
     
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="detected"><span class="type-signature"></span>detected<span class="signature">(dt, worldMatrix)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Call this method when the GUI marker is detected
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>dt</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Time elapsed since previous frame</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>worldMatrix</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">THREE.Matrix4</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">World matrix for the marker</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line797">line 797</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="hidden"><span class="type-signature"></span>hidden<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Call this method when the marker has been hidden
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line808">line 808</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
     
     
     
@@ -149,7 +362,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun, 06 Oct 2013 21:33:52 GMT
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed, 09 Oct 2013 00:10:47 GMT
 </footer>
 
 <script> prettyPrint(); </script>

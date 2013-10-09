@@ -51,6 +51,7 @@
  * @version 1.0.3
  *
  * @example
+ * //How to setup Skarf
  *
  * //create a Skarf instance which uses JSARToolKit (as an example)
  * var source = document.getElementById('myVideo');
@@ -77,6 +78,26 @@
  *
  * //update on every frame
  * skarf.update(dt);
+ *
+ * @example
+ * //How to use GUI markers
+ *
+ * //in JSON file, define GUI marker
+ * "32": {
+ *     "name": "Sculpt Amount",
+ *     "key": "sculptAmountSlider",
+ *     "type": "slider",
+ *     "params": {
+ *         "speed": 0.01
+ *     }
+ * }
+ *
+ * //in your JavaScript, define callback function which will be called when "changed" event happens for the key "sculptAmountSlider" (in the format &lt;em>myKey_myEvent&lt;/em>)
+ * sculptAmountSlider_changed = function (params) {
+ *     //params.delta will give the changed amount that you should add to your variable
+ * }
+ *
+ * //for a full list of events and params available, please refer to the individual classes in this doc
  */
 
 /**
@@ -306,6 +327,53 @@ SKARF.GuiMarker.prototype.__invokeCallback = function (type, options) {
 /**
  * Generic SKARF.GuiMarker&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -321,6 +389,63 @@ SKARF.GuiMarkerFactory.register('generic', SKARF.GenericMarker);
 /**
  * SKARF.GuiMarker that activates once until the marker is next shown&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available events:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>clicked:&lt;/strong> invoked once when marker is shown&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -344,6 +469,64 @@ SKARF.ButtonMarker.prototype.__processCallbacks = function () {
 /**
  * SKARF.GuiMarker that toggles an on/off state once until the marker is next shown&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available events:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>toggled:&lt;/strong> invoked once when marker is shown&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.checked: whether the "checkbox" is checked&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -369,6 +552,70 @@ SKARF.CheckBoxMarker.prototype.__processCallbacks = function () {
 /**
  * SKARF.GuiMarker that emulates an attribute-changing slider by rotating&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available events:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>changed:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.delta: change in rotation since previous frame, multiplied by the "speed" parameter defined in JSON file&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
+ * &lt;p>
+ * Available parameter in JSON file:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>speed:&lt;/strong> multiplier to change in rotation (defaults to 1.0)&lt;/li>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -394,6 +641,72 @@ SKARF.SliderMarker.prototype.__processCallbacks = function () {
 /**
  * SKARF.GuiMarker that emulates a combo box. Selection is based on orientation of marker.&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available events:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>changed&lt;/strong>&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.selectedId: 0-based numeric ID of selection&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available parameter in JSON file:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>numChoices:&lt;/strong> total number of choices for the combo box (compulsory)&lt;/li>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -424,6 +737,69 @@ SKARF.ComboBoxMarker.prototype.__processCallbacks = function () {
 /**
  * SKARF.GuiMarker that activates after a certain amount of time&lt;br/>
  * &lt;strong>Please do not instantiate this class on your own. Use the {@linkcode SKARF.GuiMarkerFactory GuiMarkerFactory} instead.&lt;/strong>
+ *
+ * &lt;p>
+ * GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: &lt;em>myKey_myCallbackType&lt;/em>.
+ * For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.
+ * &lt;blockquote>&lt;tt>sculptAmountSlider_changed = function (params) { ... }&lt;/tt>&lt;/blockquote>
+ * The &lt;tt>params&lt;/tt> argument will contain necessary data for that particular event. In the example above, &lt;tt>params.delta&lt;/tt> will give the change in rotation since previous frame.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Available events:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>reached:&lt;/strong> invoked when timer has reached specified time&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
+ * &lt;p>
+ * Available parameter in JSON file:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>time:&lt;/strong> duration of timer (defaults to 2.0) &lt;/li>
+ * &lt;/ul>
+ * &lt;/p>
+ *
+ * &lt;p>
+ * Inherited events from SKARF.GuiMarker:&lt;br/>
+ * &lt;ul>
+ *   &lt;li>&lt;strong>moved:&lt;/strong> invoked when marker is moved&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.dPosition: change in position since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>rotated:&lt;/strong> invoked when marker is rotated&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *       &lt;li>params.dRotation: change in rotation since previous frame&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>detected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstDetected:&lt;/strong> invoked when the &lt;tt>detected()&lt;/tt> method is first called since last &lt;tt>hidden()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *       &lt;li>params.worldMatrix: world matrix of the marker solve&lt;/li>
+ *       &lt;li>params.position: current world position&lt;/li>
+ *       &lt;li>params.rotation: current world rotation&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>hidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is called&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ *   &lt;li>&lt;strong>firstHidden:&lt;/strong> invoked when the &lt;tt>hidden()&lt;/tt> method is first called since last &lt;tt>detected()&lt;/tt> call&lt;/li>
+ *     &lt;ul>
+ *       &lt;li>params.guiMarker: this instance&lt;/li>
+ *     &lt;/ul>
+ * &lt;/ul>
+ * &lt;/p>
  * @constructor
  * @extends {SKARF.GuiMarker}
  */
@@ -440,6 +816,11 @@ SKARF.TimerMarker.prototype.constructor = SKARF.TimerMarker;
 //register with factory
 SKARF.GuiMarkerFactory.register('timer', SKARF.TimerMarker);
 //override
+/**
+ * Call this method when the GUI marker is detected
+ * @param {number} dt Time elapsed since previous frame
+ * @param {THREE.Matrix4} worldMatrix World matrix for the marker
+ */
 SKARF.TimerMarker.prototype.detected = function (dt, worldMatrix) {
     SKARF.GuiMarker.prototype.detected.call(this, dt, worldMatrix);
     this.__currTime += dt;
@@ -448,6 +829,9 @@ SKARF.TimerMarker.prototype.detected = function (dt, worldMatrix) {
         this.__invokeCallback('reached', {guiMarker: this});
     }
 };
+/**
+ * Call this method when the marker has been hidden
+ */
 SKARF.TimerMarker.prototype.hidden = function () {
 
     //reset if marker disappears
@@ -1861,7 +2245,7 @@ SKARF.Skarf.prototype.initCameraProjMatrix = function () {
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Sun, 06 Oct 2013 21:33:50 GMT
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed, 09 Oct 2013 00:10:46 GMT
 </footer>
 
 <script> prettyPrint(); </script>
