@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: ComboBoxMarker</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: ComboBoxMarker</h1>
+
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="SKARF.html">SKARF</a>.</span>
+    
+    ComboBoxMarker
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+<dt>
+    <h4 class="name" id="ComboBoxMarker"><span class="type-signature"></span>new ComboBoxMarker<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        SKARF.GuiMarker that emulates a combo box. Selection is based on orientation of marker.<br/><strong>Please do not instantiate this class on your own. Use the <a href="SKARF.GuiMarkerFactory.html"><code>GuiMarkerFactory</code></a> instead.</strong><p>GUI markers work via event callbacks. Users should define callback functions in their JavaScript which matches this format: <em>myKey_myCallbackType</em>.For example, if you have a GUI marker with key of "sculptAmountSlider" (defined in JSON file) and you want it to react to the "changed" event, create a function named "sculptAmountSlider_changed" i.e.<blockquote><tt>sculptAmountSlider_changed = function (params) { ... }</tt></blockquote>The <tt>params</tt> argument will contain necessary data for that particular event. In the example above, <tt>params.delta</tt> will give the change in rotation since previous frame.</p><p>Available events:<br/><ul>  <li><strong>changed</strong></li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.selectedId: 0-based numeric ID of selection</li>      <li>params.rotation: current world rotation</li>    </ul></ul></p><p>Available parameter in JSON file:<br/><ul>  <li><strong>numChoices:</strong> total number of choices for the combo box (compulsory)</li></ul></p><p>Inherited events from SKARF.GuiMarker:<br/><ul>  <li><strong>moved:</strong> invoked when marker is moved</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.position: current world position</li>      <li>params.dPosition: change in position since previous frame</li>    </ul>  <li><strong>rotated:</strong> invoked when marker is rotated</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.rotation: current world rotation</li>      <li>params.dRotation: change in rotation since previous frame</li>    </ul>  <li><strong>detected:</strong> invoked when the <tt>detected()</tt> method is called</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.worldMatrix: world matrix of the marker solve</li>      <li>params.position: current world position</li>      <li>params.rotation: current world rotation</li>    </ul>  <li><strong>firstDetected:</strong> invoked when the <tt>detected()</tt> method is first called since last <tt>hidden()</tt> call</li>    <ul>      <li>params.guiMarker: this instance</li>      <li>params.worldMatrix: world matrix of the marker solve</li>      <li>params.position: current world position</li>      <li>params.rotation: current world rotation</li>    </ul>  <li><strong>hidden:</strong> invoked when the <tt>hidden()</tt> method is called</li>    <ul>      <li>params.guiMarker: this instance</li>    </ul>  <li><strong>firstHidden:</strong> invoked when the <tt>hidden()</tt> method is first called since last <tt>detected()</tt> call</li>    <ul>      <li>params.guiMarker: this instance</li>    </ul></ul></p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line686">line 686</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+    
+    </div>
+    
+    
+        <h3 class="subsection-title">Extends</h3>
+        
+        <ul>
+            <li><a href="SKARF.GuiMarker.html">SKARF.GuiMarker</a></li>
+        </ul>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="detected"><span class="type-signature"></span>detected<span class="signature">(dt, worldMatrix)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Call this method when the GUI marker is detected
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>dt</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Time elapsed since previous frame</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>worldMatrix</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">THREE.Matrix4</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">World matrix for the marker</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="SKARF.GuiMarker.html#detected">SKARF.GuiMarker#detected</a>
+    </li></dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line194">line 194</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="hidden"><span class="type-signature"></span>hidden<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Call this method when the marker has been hidden
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="SKARF.GuiMarker.html#hidden">SKARF.GuiMarker#hidden</a>
+    </li></dd>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line267">line 267</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="SKARF.ArLib.html">ArLib</a></li><li><a href="SKARF.ButtonMarker.html">ButtonMarker</a></li><li><a href="SKARF.CheckBoxMarker.html">CheckBoxMarker</a></li><li><a href="SKARF.ComboBoxMarker.html">ComboBoxMarker</a></li><li><a href="SKARF.EmptyModelLoader.html">EmptyModelLoader</a></li><li><a href="SKARF.GenericMarker.html">GenericMarker</a></li><li><a href="SKARF.GuiMarker.html">GuiMarker</a></li><li><a href="SKARF.JsArToolKitArLib.html">JsArToolKitArLib</a></li><li><a href="SKARF.JsArucoArLib.html">JsArucoArLib</a></li><li><a href="SKARF.JsonBinaryModelLoader.html">JsonBinaryModelLoader</a></li><li><a href="SKARF.JsonModelLoader.html">JsonModelLoader</a></li><li><a href="SKARF.MarkerManager.html">MarkerManager</a></li><li><a href="SKARF.ModelLoader.html">ModelLoader</a></li><li><a href="SKARF.ObjModelLoader.html">ObjModelLoader</a></li><li><a href="SKARF.Renderer.html">Renderer</a></li><li><a href="SKARF.Skarf.html">Skarf</a></li><li><a href="SKARF.SliderMarker.html">SliderMarker</a></li><li><a href="SKARF.ThreeJsRenderer.html">ThreeJsRenderer</a></li><li><a href="SKARF.TimerMarker.html">TimerMarker</a></li></ul><h3>Namespaces</h3><ul><li><a href="SKARF.html">SKARF</a></li><li><a href="SKARF.ArLibFactory.html">ArLibFactory</a></li><li><a href="SKARF.GuiMarkerFactory.html">GuiMarkerFactory</a></li><li><a href="SKARF.ModelLoaderFactory.html">ModelLoaderFactory</a></li><li><a href="SKARF.RendererFactory.html">RendererFactory</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed, 09 Oct 2013 00:10:46 GMT
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

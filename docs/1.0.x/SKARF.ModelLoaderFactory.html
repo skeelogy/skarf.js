@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Namespace: ModelLoaderFactory</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Namespace: ModelLoaderFactory</h1>
+
+    
+
+
+
+<section>
+    
+<header>
+    <h2>
+        <span class="ancestors"><a href="SKARF.html">SKARF</a>.</span>
+    
+    ModelLoaderFactory
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+            <div class="description">Factory which creates ModelLoaders</div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line828">line 828</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        <h3 class="subsection-title">Methods</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="create"><span class="type-signature">&lt;static> </span>create<span class="signature">(type)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Function to create a SKARF.ModelLoader instance
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Type of ModelLoader to create: 'empty', 'json', 'json_bin', 'obj'</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line836">line 836</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="register"><span class="type-signature">&lt;static> </span>register<span class="signature">(mappingName, mappingClass)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        Registers a type string to a class
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>mappingName</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">Name of the mapping which is used to identify the type when creating instances e.g. 'threejs'</td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>mappingClass</code></td>
+            
+            
+            <td class="type">
+            
+                
+<span class="param-type"><a href="SKARF.ModelLoader.html">SKARF.ModelLoader</a></span>
+
+
+            
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">ModelLoader class that will be created when the associated type is used</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="skarf.js.html">skarf.js</a>, <a href="skarf.js.html#line852">line 852</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        </dl>
+    
+    
+    
+    
+    
+</article>
+
+</section>  
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="SKARF.ArLib.html">ArLib</a></li><li><a href="SKARF.ButtonMarker.html">ButtonMarker</a></li><li><a href="SKARF.CheckBoxMarker.html">CheckBoxMarker</a></li><li><a href="SKARF.ComboBoxMarker.html">ComboBoxMarker</a></li><li><a href="SKARF.EmptyModelLoader.html">EmptyModelLoader</a></li><li><a href="SKARF.GenericMarker.html">GenericMarker</a></li><li><a href="SKARF.GuiMarker.html">GuiMarker</a></li><li><a href="SKARF.JsArToolKitArLib.html">JsArToolKitArLib</a></li><li><a href="SKARF.JsArucoArLib.html">JsArucoArLib</a></li><li><a href="SKARF.JsonBinaryModelLoader.html">JsonBinaryModelLoader</a></li><li><a href="SKARF.JsonModelLoader.html">JsonModelLoader</a></li><li><a href="SKARF.MarkerManager.html">MarkerManager</a></li><li><a href="SKARF.ModelLoader.html">ModelLoader</a></li><li><a href="SKARF.ObjModelLoader.html">ObjModelLoader</a></li><li><a href="SKARF.Renderer.html">Renderer</a></li><li><a href="SKARF.Skarf.html">Skarf</a></li><li><a href="SKARF.SliderMarker.html">SliderMarker</a></li><li><a href="SKARF.ThreeJsRenderer.html">ThreeJsRenderer</a></li><li><a href="SKARF.TimerMarker.html">TimerMarker</a></li></ul><h3>Namespaces</h3><ul><li><a href="SKARF.html">SKARF</a></li><li><a href="SKARF.ArLibFactory.html">ArLibFactory</a></li><li><a href="SKARF.GuiMarkerFactory.html">GuiMarkerFactory</a></li><li><a href="SKARF.ModelLoaderFactory.html">ModelLoaderFactory</a></li><li><a href="SKARF.RendererFactory.html">RendererFactory</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.0-dev</a> on Wed, 09 Oct 2013 00:10:47 GMT
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
