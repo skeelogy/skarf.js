@@ -39,9 +39,9 @@ This is a framework for handling JavaScript augmented reality (AR) libraries in 
 
 ### Docs
 
-* [1.0](http://skeelogy.github.io/skarf.js/docs/1.0)
+* [1.0.x](http://skeelogy.github.io/skarf.js/docs/1.0.x)
 
 ### License
 
 Released under GNU General Public License version 3 (GPLv3)<br/>
-Copyright (c) 2013 Skeel Lee ([http://cg.skeelogy.com](http://cg.skeelogy.com)) @skeelogy
+Copyright (c) 2013 Skeel Lee ([http://cg.skeelogy.com](http://cg.skeelogy.com))
