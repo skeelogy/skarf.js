@@ -12,11 +12,10 @@ This is a framework for handling JavaScript augmented reality (AR) libraries in 
 
 ### Features
 
-* All coordinate system differences between different AR libraries have been compensated to fit Three.js' right-handed Y-up coordinate system (i.e. no flipping, weird orientation of models etc)
-* Specified main marker defines the origin. Camera and other markers are all positioned relative to this origin, so lighting/shadows work properly in the scene. Most online examples demonstrate AR with a static camera only, with moving objects.
-* Specify marker-model relationships using a [JSON marker-model file](https://github.com/skeelogy/skarf.js/blob/master/examples/models/models_jsartoolkit.json). An internal marker manager automatically manages loading of models when associated marker is detected.
-* Model loader system loads different model file formats into Three.js: OBJ, JSON and binary JSON
-* GUI markers system allows users to control user settings using AR markers
+* Automatic loading of models when the associated markers are detected (association is specified in a JSON file). Currently supported model formats: .obj, .js and binary .js.
+* Fixing of the world origin to a specified main marker, with the camera and other markers positioned around this origin for lighting/shadows to work properly in the 3D scene
+* Automatic compensation for coordinate system differences between the different AR libraries and Three.js (which might otherwise lead to flipping and offsetted orientations of loaded models)
+* GUI marker system which allows users to control settings using AR markers
 * Expandable to fit other JavaScript AR libraries in the future
 
 ### Examples
