@@ -40,6 +40,10 @@ This is a framework for handling JavaScript augmented reality (AR) libraries in 
 
 * [1.0.x](http://skeelogy.github.io/skarf.js/docs/1.0.x)
 
+### Browser Support
+
+Tested only in Google Chrome (recommended) and Mozilla FireFox
+
 ### License
 
 Released under GNU General Public License version 3 (GPLv3)<br/>
